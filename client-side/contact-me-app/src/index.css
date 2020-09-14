@@ -22,3 +22,7 @@ code {
   text-align: center;
   margin-top: 20vh;
 }
+
+.company-name:hover {
+  cursor: pointer;
+}

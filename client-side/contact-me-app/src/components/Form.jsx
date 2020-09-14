@@ -22,6 +22,12 @@ function Form () {
   }
   const onSubmit = (e) => {
     e.preventDefault()
+    if (formInfo.name == "") alert('Name input is required')
+    if (formInfo.surname == "") alert('Surname input is required')
+    if (formInfo.email == "") alert('Email input is required')
+    if (formInfo.mobileNo == "") alert('Number input is required')
+    if (formInfo.mobileNo.length < 10) alert("Number should be at least 10 digits")
+    if (formInfo.question == "") alert('Question input required')
     submitQuestion(formInfo)
     console.log('formInfo', formInfo)
   }
@@ -30,7 +36,7 @@ function Form () {
   return (
     <div>
       <form onSubmit={(e) => onSubmit(e)}>
-        <input type="text" value={formInfo.name} onChange={onChange} name="name" placeholder="Name" /><br />
+        <input type="text" value={formInfo.name} onChange={onChange} name="name" placeholder="Name" minLength="2" /><br />
         <input type="text" value={formInfo.surname} onChange={onChange} name="surname" placeholder="Surname" /><br />
         <input type="email" value={formInfo.email} onChange={onChange} name="email" placeholder="Email" /><br />
         <input type="Number" value={formInfo.mobileNo} onChange={onChange} name="mobileNo" placeholder="Mobile Number" /><br />

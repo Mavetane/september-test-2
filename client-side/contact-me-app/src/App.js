@@ -25,7 +25,7 @@ function App () {
   }, [setCompanies])
 
   const company = () => companies.map(item => (<div key={item.id}>
-    <h3 onClick={() => show(item)}>{item.name}</h3>
+    <h3 onClick={() => show(item)} className="company-name">{item.name}</h3>
     <label>{item.email}</label><br />
     <a>{item.website}</a><br />
     <label>{item.address}</label>
