@@ -16,7 +16,7 @@ Install MongoDB locally on your machine
 
 ### Running the server
 
-> npm install
+> npm install (to install needed dependencies)
 > nodemon server.js (for starting the server)
 
 
@@ -26,5 +26,5 @@ I created a form component to capture the customers details, within the form com
 
 ### Starting the Client Side 
 
-> npm install
-> npm start
+> npm install (to install needed dependencies)
+> npm start (to start the server)
