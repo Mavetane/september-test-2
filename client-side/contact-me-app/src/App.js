@@ -1,31 +1,34 @@
 import React from 'react';
 import axios from 'axios'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/Form';
-// import getCompanies from './actions/index'
 
 function App () {
-  const getCompanies = async () => {
+  const [companies, setCompanies] = useState([])
+
+  useEffect(async () => {
     try {
-      const { data } = await axios.get("http://localhost:3007/companies");
-      console.log('data', data)
+      const { data } = await axios.get('http://localhost:3007/companies')
+      setCompanies(data)
     } catch (e) {
       console.log(e)
     }
+  }, [setCompanies])
 
-  }
-  useEffect(() => {
-    getCompanies()
-  }, [])
-
-
+  console.log('companies', companies.map(item => <div key={item.id}>{item.name}</div>))
   return (
     <div className="App">
       <header className="App-header">
         Contact me app
       </header>
       <Form />
+      {companies.map(item => (<div key={item.id}>
+        <h3>{item.name}</h3>
+        <label>{item.email}</label><br />
+        <label>{item.website}</label><br />
+        <label>{item.address}</label>
+      </div>))}
     </div>
   );
 }

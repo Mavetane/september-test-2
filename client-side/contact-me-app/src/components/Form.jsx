@@ -1,8 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios'
 
 function Form () {
   const [formInfo, setFormInfo] = useState({ name: "", surname: "", email: "", mobileNo: "", question: "" });
+
+
+  const submitQuestion = async (formInfo) => {
+    try {
+      const { data } = await axios.post('http://localhost:3007/customers', { ...formInfo })
+      console.log("data", data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -10,6 +22,7 @@ function Form () {
   }
   const onSubmit = (e) => {
     e.preventDefault()
+    submitQuestion(formInfo)
     console.log('formInfo', formInfo)
   }
 
