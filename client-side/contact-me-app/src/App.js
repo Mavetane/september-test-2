@@ -5,7 +5,15 @@ import './App.css';
 import Form from './components/Form';
 
 function App () {
-  const [companies, setCompanies] = useState([])
+  const [companies, setCompanies] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState(<Form />);
+  const [state, setState] = useState(false)
+
+  const show = (item) => {
+    setSelectedCompany(item)
+    setState(!state)
+    console.log(state)
+  }
 
   useEffect(async () => {
     try {
@@ -16,19 +24,29 @@ function App () {
     }
   }, [setCompanies])
 
-  console.log('companies', companies.map(item => <div key={item.id}>{item.name}</div>))
+  const company = () => companies.map(item => (<div key={item.id}>
+    <h3 onClick={() => show(item)}>{item.name}</h3>
+    <label>{item.email}</label><br />
+    <a>{item.website}</a><br />
+    <label>{item.address}</label>
+  </div>))
+
   return (
     <div className="App">
       <header className="App-header">
         Contact me app
       </header>
-      <Form />
-      {companies.map(item => (<div key={item.id}>
-        <h3>{item.name}</h3>
-        <label>{item.email}</label><br />
-        <label>{item.website}</label><br />
-        <label>{item.address}</label>
-      </div>))}
+      <div className="container">
+        <div className="display-names">
+          <h2>Registered Companies</h2>
+          {company()}
+        </div>
+        {state == true ?
+          <div className="display-form">
+            <h3>{selectedCompany.name}</h3>
+            <Form />
+          </div> : null}
+      </div>
     </div>
   );
 }
